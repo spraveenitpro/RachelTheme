@@ -6,13 +6,30 @@
 <!--[if gt IE 9]><html><![endif]-->
 <!--[if !IE]><html><![endif]-->
 <head>
-<meta charset="utf-8" />
+<meta charset="<?php bloginfo('charset'); ?>" />
 <meta name="viewport" content="width=device-width" />
-<title>WordPress Theme Building - Creating a WordPress theme from static HTML</title>
-<link rel="stylesheet" type="text/css" media="all" href="style.css" />
+<title>
+	
+	<?php 
+
+		global $page, $paged;
+		wp_title( '|', true, 'right' );
+		bloginfo('name' );
+		$site_description = get_bloginfo('description', 'display');
+
+		if ($site_description && (is_home() || is_front_page() ) )
+			echo " | $site_description ";
+	 ?>
+
+
+
+</title>
+<link rel="stylesheet" type="text/css" media="all" href="<?php  bloginfo('stylesheet_url' ); ?>" />
+<?php wp_head(); ?>
+
 </head>
 
-<body>
+<body <?php body_class(); ?>>
 
 	<header role="banner">
 
@@ -20,9 +37,9 @@
 			
 			<!-- site name and description  -->
 			<h1 id="site-title" class="one-half-left">
-				<a href="" title="Creating a WordPress theme from static html - home" rel="home">WordPress Theme Building</a>
+				<a href="<?php echo home_url(); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 			</h1>
-			<h2 id="site-description">Creating a WordPress theme from static html</h2>
+			<h2 id="site-description"><?php bloginfo('description' ); ?></h2>
 		
 		</div>
 
